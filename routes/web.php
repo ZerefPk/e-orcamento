@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BudgetUnitController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,18 +21,16 @@ Route::get('/', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['prefix' => 'unidades-orcamentarias', 'middleware' => ['auth', 'verified']], function (){
-    Route::get('/', function () {
-        return view('config.budget-unit.index');
-    })->name('budget-unit.index');
-    Route::get('/novo', function () {
-        return view('config.budget-unit.create');
-    })->name('budget-unit.create');
+    
+    Route::get('/',[BudgetUnitController::class, 'show'] )->name('budget-unit.index');
+    
+    Route::get('/novo',[BudgetUnitController::class, 'create'])->name('budget-unit.create');
+    Route::post('/store',[BudgetUnitController::class, 'store'])->name('budget-unit.store');
+    
     Route::get('/editar', function () {
         return view('config.budget-unit.create');
     })->name('budget-unit.edit');
-    Route::get('/detalhes', function () {
-        return view('config.budget-unit.show');
-    })->name('budget-unit.show');
+    Route::get('{budgetUnit}/detalhes', [BudgetUnitController::class, 'details'])->name('budget-unit.show');
     
 });
 Route::group(['prefix' => 'projetos', 'middleware' => ['auth', 'verified']], function (){

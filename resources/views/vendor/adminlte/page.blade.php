@@ -1,5 +1,5 @@
 @extends('adminlte::master')
-@include('sweetalert::alert')
+
 
 @inject('layoutHelper', 'JeroenNoten\LaravelAdminLte\Helpers\LayoutHelper')
 

@@ -24,7 +24,7 @@
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
 
-                    <h3 class="profile-username text-center">DTIC</h3>
+                    <h3 class="profile-username text-center">{{$budgetUnit->acronym}}</h3>
                     <p class="text-muted text-center">Diretoria de Tencologia da Informação</p>
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
