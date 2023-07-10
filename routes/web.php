@@ -4,6 +4,7 @@ use App\Http\Controllers\BudgetPlanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetUnitController;
+use App\Http\Controllers\ExpenseElementController;
 use App\Http\Controllers\FinancialAccountController;
 use App\Http\Controllers\ProjectController;
 
@@ -58,18 +59,13 @@ Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], funct
 });
 
 Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/', function () {
-        return view('config.elements.index');
-    })->name('elements.index');
-    Route::get('/novo', function () {
-        return view('config.elements.create');
-    })->name('elements.create');
-    Route::get('/editar', function () {
-        return view('config.elements.edit');
-    })->name('elements.edit');
-    Route::get('/detalhes', function () {
-        return view('config.elements.show');
-    })->name('elements.show');
+    Route::get('/', [ExpenseElementController::class, 'show'])->name('elements.index');
+
+    Route::get('/novo', [ExpenseElementController::class, 'create'])->name('elements.create');
+    Route::post('/store', [ExpenseElementController::class, 'store'])->name('elements.store');
+
+    Route::get('{expenseElement}/editar', [ExpenseElementController::class, 'edit'])->name('elements.edit');
+    Route::get('{expenseElement}/detalhes', [ExpenseElementController::class, 'details'])->name('elements.show');
 });
 
 Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'verified']], function () {

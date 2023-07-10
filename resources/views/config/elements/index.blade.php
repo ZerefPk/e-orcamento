@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Elementos de Despesas</li>
             </ol>
         </div>
@@ -19,28 +19,28 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-
             <div class="card-tools">
                 <div class="row">
                     <div class="col">
-                        <a href="{{route('elements.create')}}" class="btn btn-success">
+                        <a href="{{ route('elements.create') }}" class="btn btn-success">
                             <i class="fa fa-plus"></i>
                             Adicionar
                         </a>
                     </div>
                     <div class="col">
-                        <div class="input-group input-group-lg">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                        <form method="GET" action={{ route('elements.index') }}>
+                            <div class="input-group input-group-lg">
+                                <input type="text" value="{{ request('q') }}" name="q"
+                                    class="form-control float-right" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -56,35 +56,42 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>4.1.4.2.4</td>
-                        <td>Diretoria de Tecnologia da Informação e Comunicação</td>
-                        <td><span class="tag tag-success">Ativo</span></td>
-                        <td>
-                            <a href="{{route('elements.show')}}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-folder"></i>
-                                Ver
-                            </a>
-                            <a href="{{route('elements.edit')}}" class="btn btn-info btn-sm">
-                                <i class="fas fa-pencil-alt"></i>
-                                Editar
-                            </a>
-                        </td>
-                    </tr>
-
+                    @forelse ($expenseElements as $expenseElement)
+                        <tr>
+                            <td>{{ $expenseElement->id }}</td>
+                            <td>{{ $expenseElement->cod }}</td>
+                            <td>{{ $expenseElement->description }}</td>
+                            <td>
+                                <span class="{{ $expenseElement->status ? 'text-success' : 'text-danger' }}">
+                                    {{ $expenseElement->status ? 'Ativo' : 'Desativado' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('elements.show', $expenseElement) }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-folder"></i>
+                                    Ver
+                                </a>
+                                <a href="{{ route('elements.edit', $expenseElement) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Editar
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="5">A busca não retornou resultados.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
-        <div class="card-footer clearfix">
-            <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </div>
+        @if ($expenseElements->hasPages())
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    {{ $expenseElements->links() }}
+                </ul>
+            </div>
+        @endif
 
     </div>
 @stop

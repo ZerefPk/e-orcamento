@@ -19,37 +19,38 @@
 
 @section('content')
     <div class="card">
-
-        <form>
+        <form method="POST" action={{ route("elements.store") }} enctype="multipart/form-data">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="acronym">Conta Contábil</label>
-                    <select class="form-control" name="status" value="{{ old('account') }}">
-                        <option value="1">25225.2552.222- Despesa</option>
-                        <option value="1">Despesa Corrente</option>
+                    <label for="financialAccountId">Conta Contábil</label>
+                    <select class="form-control" name="financialAccountId" value="{{ old('financialAccountId') }}">
+                        @foreach ($financialAccounts as $financialAccount)
+                            <option value="{{ $financialAccount->id }}">{{ $financialAccount->cod }} -
+                                {{ $financialAccount->description }}</option>
+                        @endforeach
                     </select>
-                    @error('account')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    @error('financialAccountId')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="accounts">Elemento [COD DESCRIÇÃO ]</label>
-                    <textarea type="text" class="form-control" name="elements" placeholder="252 ABC"> {{ old('elements') }} </textarea>
-                    @error('elements')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="csv">Arquivo de Elementos de Despesa (.csv)</label>
+                    <input type="file" accept=".csv" class="form-control" name="csv" value="{{ old('csv') }}" />
+                    @error('csv')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                    <label>Delimitador</label>
+                    <select class="form-control" name="delimiter" value="{{ old('delimiter') }}">
+                        <option value=";">Ponto e Vírgula (;)</option>
+                        <option value=",">Vírgula (,)</option>
                     </select>
-                    @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    @error('delimiter')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
-
             </div>
 
             <div class="card-footer">
