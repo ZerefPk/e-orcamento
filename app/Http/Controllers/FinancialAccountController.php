@@ -49,10 +49,10 @@ class FinancialAccountController extends Controller
         foreach ($accounts as $account) {
             $cod_arr = explode('.', $account['COD']);
 
-            if (count($cod_arr) != 5) {
+            if (count($cod_arr) != 6 || count(str_split($cod_arr[array_key_last($cod_arr)])) != 2 || count(FinancialAccount::where('cod', '=', $account["COD"])->get()) > 0) {
                 $errored_accounts_count++;
                 $errored_accounts_alert_string = $errored_accounts_alert_string . 'COD: ' . $account['COD'] . ', DESCRICAO: ' . $account['DESCRICAO'] . "</br>";
-            } else if (!FinancialAccount::where('cod', '=', $account["COD"])) {
+            } else {
                 $save = FinancialAccount::create([
                     "cod" => $account["COD"],
                     "description" => $account["DESCRICAO"],
@@ -66,9 +66,6 @@ class FinancialAccountController extends Controller
                 } else {
                     $succeeded_accounts_count++;
                 }
-            } else {
-                $errored_accounts_count++;
-                $errored_accounts_alert_string = $errored_accounts_alert_string . 'COD: ' . $account['COD'] . ', DESCRICAO: ' . $account['DESCRICAO'] . "</br>";
             }
         }
 
