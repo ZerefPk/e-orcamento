@@ -20,32 +20,42 @@
 @section('content')
     <div class="card">
 
-        <form>
+        <form action="{{route('accounts.update', $financialAccount)}}" method="POST">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="acronym">Código</label>
-                    <input type="text" class="form-control" name="cod" placeholder="Código"
-                        value="{{ old('cod') }}">
-                    @error('cod')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    <label>Código</label>
+                    <input 
+                    type="text"
+                    disabled
+                    class="form-control input-disabled" 
+                    value="{{$financialAccount->cod}}" 
+                    >
+    
                 </div>
                 <div class="form-group">
                     <label for="description">Descrição</label>
-                    <input type="text" class="form-control" name="description" placeholder="Nome completo da unidade"
-                        value="{{ old('description') }}">
+                    <input type="text" class="form-control" name="description" placeholder="Descrição da Conta"
+                        value="{{ (old('description')) ? old('description'): $financialAccount->description}}">
                     @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{$message}}</p>
                     @enderror
+                </div>
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <select class="form-control" name="type" value="{{ old('type') }}">
+                        <option value="1" {{($financialAccount->type) ? "SELECTED" : "" }}>Despesa de Capital</option>
+                        <option value="0" {{(!$financialAccount->type) ? "SELECTED" : "" }}>Despesa Corrente</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                        <option value="1" {{($financialAccount->status) ? "SELECTED" : "" }}>Ativo</option>
+                        <option value="0" {{(!$financialAccount->status) ? "SELECTED" : "" }}>Desativado</option>
                     </select>
                     @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{$message}}</p>
                     @enderror
                 </div>
 

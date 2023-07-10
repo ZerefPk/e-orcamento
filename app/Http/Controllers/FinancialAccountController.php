@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FinancialAccountUpdateRequest;
 use App\Models\FinancialAccount;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -83,5 +84,27 @@ class FinancialAccountController extends Controller
     public function details(FinancialAccount $financialAccount): View
     {
         return view('config.accounts.show', ['financialAccount' => $financialAccount]);
+    }
+
+    public function edit(FinancialAccount $financialAccount): View
+    {
+        return view('config.accounts.edit', ['financialAccount' => $financialAccount]);
+    }
+    
+    public function update(FinancialAccount $financialAccount, FinancialAccountUpdateRequest $request){
+
+        $update = $financialAccount->update($request->all());
+
+        if (!$update) {
+            Alert::error('Conta Contábil', 'Ocorreu um erro ao atualizar.');
+            return redirect()->back();
+        }
+        else {
+            Alert::success('Conta Contábil', 'Atualizado com sucesso');
+        }
+        
+        return redirect()->route('accounts.index');
+
+        
     }
 }

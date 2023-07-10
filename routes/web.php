@@ -50,6 +50,8 @@ Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], funct
     Route::post('/store', [FinancialAccountController::class, 'store'])->name('accounts.store');
 
     Route::get('{financialAccount}/editar', [FinancialAccountController::class, 'edit'])->name('accounts.edit');
+    Route::post('{financialAccount}/update', [FinancialAccountController::class, 'update'])->name('accounts.update');
+    
     Route::get('{financialAccount}/detalhes', [FinancialAccountController::class, 'details'])->name('accounts.show');
 });
 

@@ -30,7 +30,7 @@
                     <div class="col">
                         <form method="GET" action={{ route('accounts.index') }}>
                             <div class="input-group input-group-lg">
-                                <input type="text" value={{ request('q') }} name="q"
+                                <input type="text" value="{{ request('q') }}" name="q"
                                     class="form-control float-right" placeholder="Search">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
@@ -51,6 +51,7 @@
                         <th>#</th>
                         <th>COD</th>
                         <th>Descrição</th>
+                        <th>Despesa</th>
                         <th>Status</th>
                         <th>Opções</th>
                     </tr>
@@ -61,6 +62,10 @@
                             <td>{{ $financialAccount->id }}</td>
                             <td>{{ $financialAccount->cod }}</td>
                             <td>{{ $financialAccount->description }}</td>
+                            <td class="text-uppercase">
+                                {{ $financialAccount->type ? 'Corrente' : 'Capital' }}
+
+                            </td>
                             <td>
                                 <span class="{{ $financialAccount->status ? 'text-success' : 'text-danger' }}">
                                     {{ $financialAccount->status ? 'Ativo' : 'Desativado' }}
