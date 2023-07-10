@@ -20,33 +20,24 @@
 @section('content')
     <div class="card">
 
-        <form>
+        <form method="POST" action={{ route('accounts.store') }} enctype="multipart/form-data">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="acronym">Tipo</label>
-                    <select class="form-control" name="status" value="{{ old('type') }}">
-                        <option value="1">Despesa de Capital</option>
-                        <option value="1">Despesa Corrente</option>
-                    </select>
-                    @error('type')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="accounts">Arquivo de Contas (.csv)</label>
+                    <input type="file" accept=".csv" class="form-control" name="csv" value="{{ old('csv') }}" />
+                    @error('csv')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="accounts">Contas [COD DESCRIÇÃO ]</label>
-                    <textarea type="text" class="form-control" name="accounts" placeholder="252 ABC"> {{ old('accounts') }} </textarea>
-                    @error('accounts')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-                <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                    <label>Delimitador</label>
+                    <select class="form-control" name="delimiter" value="{{ old('delimiter') }}">
+                        <option value=";">Ponto e Vírgula (;)</option>
+                        <option value=",">Vírgula (,)</option>
                     </select>
-                    @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    @error('delimiter')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 

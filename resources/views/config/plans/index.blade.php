@@ -19,7 +19,6 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-
             <div class="card-tools">
                 <div class="row">
                     <div class="col">
@@ -70,17 +69,22 @@
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('plans.show') }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('plans.show', $budgetPlan) }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-folder"></i>
                                     Ver
                                 </a>
-                                <a href="{{ route('plans.edit') }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('plans.edit', $budgetPlan) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                     Editar
                                 </a>
                             </td>
                         </tr>
                     @empty
+                        <tr>
+                            <td colspan="5">
+                                A Busca não retornou resultados
+                            </td>
+                        </tr>
                     @endforelse
                 </tbody>
             </table>
