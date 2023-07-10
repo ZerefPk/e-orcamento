@@ -19,7 +19,6 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-
             <div class="card-tools">
                 <div class="row">
                     <div class="col">
@@ -72,7 +71,7 @@
                                     <i class="fas fa-folder"></i>
                                     Ver
                                 </a>
-                                <a href="{{ route('budget-unit.edit') }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('budget-unit.edit', $budgetUnit) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                     Editar
                                 </a>

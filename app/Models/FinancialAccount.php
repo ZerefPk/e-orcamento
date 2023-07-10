@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FinancialAccount extends Model
 {
     use HasFactory;
-    protected $table = 'financial_account';
+    protected $table = 'financial_accounts';
     protected $fillable = [
         'cod',
         'description',

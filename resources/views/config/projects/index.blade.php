@@ -71,15 +71,17 @@
                                     <i class="fas fa-folder"></i>
                                     Ver
                                 </a>
-                                <a href="{{ route('projects.edit') }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('projects.edit', $project) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                     Editar
                                 </a>
                             </td>
                         </tr>
                     @empty
-                        <tr colspan="5">
-                            A busca não retornou resultados
+                        <tr>
+                            <td colspan="5">
+                                A Busca não retornou resultados
+                            </td>
                         </tr>
                     @endforelse
 
