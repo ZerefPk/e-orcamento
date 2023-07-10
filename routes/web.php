@@ -30,6 +30,8 @@ Route::group(['prefix' => 'unidades-orcamentarias', 'middleware' => ['auth', 've
     Route::post('/store', [BudgetUnitController::class, 'store'])->name('budget-unit.store');
 
     Route::get('{budgetUnit}/editar', [BudgetUnitController::class, 'edit'])->name('budget-unit.edit');
+    Route::post('{budgetUnit}/update', [BudgetUnitController::class, 'update'])->name('budget-unit.update');
+    
     Route::get('{budgetUnit}/detalhes', [BudgetUnitController::class, 'details'])->name('budget-unit.show');
 });
 

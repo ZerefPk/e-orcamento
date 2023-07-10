@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Contas Contábeis - Editar')
+@section('title', 'Contas Contábeis - Editar '.$financialAccount->cod)
 
 @section('content_header')
     <div class="row mb-2">
@@ -24,8 +24,8 @@
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label>Código</label>
-                    <input 
+                    <label for="a">Código</label>
+                    <input name="a"
                     type="text"
                     disabled
                     class="form-control input-disabled" 
@@ -42,17 +42,18 @@
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Tipo</label>
-                    <select class="form-control" name="type" value="{{ old('type') }}">
-                        <option value="1" {{($financialAccount->type) ? "SELECTED" : "" }}>Despesa de Capital</option>
-                        <option value="0" {{(!$financialAccount->type) ? "SELECTED" : "" }}>Despesa Corrente</option>
+                    <label for="type">Tipo</label>
+                    <select class="form-control" name="type">
+                        
+                        <option value="1" @if(old('type', $financialAccount->type))  selected @endif>Despesa de Capital</option>
+                        <option value="0" @if(!old('type', $financialAccount->type))  selected @endif>Despesa Corrente</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option value="1" {{($financialAccount->status) ? "SELECTED" : "" }}>Ativo</option>
-                        <option value="0" {{(!$financialAccount->status) ? "SELECTED" : "" }}>Desativado</option>
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status">
+                        <option value="1" @if(old('status', $financialAccount->status))  selected @endif>Ativo</option>
+                        <option value="0" @if(!old('status', $financialAccount->status))  selected @endif>Desativado</option>
                     </select>
                     @error('status')
                         <p class="text-danger">{{$message}}</p>

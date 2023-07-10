@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Unidades Orçamentarias - Editar')
+@section('title', 'Unidades Orçamentarias - Editar '.$budgetUnit->acronym)
 
 @section('content_header')
     <div class="row mb-2">
@@ -20,32 +20,33 @@
 @section('content')
     <div class="card">
 
-        <form>
+        <form method="POST" action="{{ route('budget-unit.update', $budgetUnit) }}">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="acronym">Sigla</label>
                     <input type="text" class="form-control" name="acronym" placeholder="Sigla"
-                        value="{{ old('acronym') }}">
+                        value="{{ old('acronym') ? old('acronym') : $budgetUnit->acronym }}">
                     @error('acronym')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" name="description" placeholder="Nome completo da unidade"
-                        value="{{ old('description') }}">
+                        value="{{ old('description') ? old('description') : $budgetUnit->description }}">
                     @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label>Status</label>
-                    <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                    <label for="status">Status</label>
+                    <select class="form-control" name="status">
+                        <option value="1" @if(old('status', $budgetUnit->status)) selected @endif>Ativo</option>
+                        <option value="0" @if(!old('status', $budgetUnit->status))  selected @endif>Desativado</option>
                     </select>
                     @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
