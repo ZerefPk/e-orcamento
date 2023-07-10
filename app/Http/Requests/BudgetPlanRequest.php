@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BudgetUnitRequest extends FormRequest
+class BudgetPlanRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,18 +21,20 @@ class BudgetUnitRequest extends FormRequest
      */
     public function rules(): array
     {
-        return  [
-            'acronym' => 'required|min:2|max:10|unique:budget_units,acronym,except,id',
-            'description' => 'required|min:2|max:255',
+        return [
+            'name' => 'required|min:2|max:50|unique:budget_plans,name,except,id',
+            'beginning_term' => 'required',
+            'end_period' =>  'required',
             'status' => 'required|boolean',
         ];
     }
 
     public function attributes(): array
     {
-        return  [
-            'acronym' => '[Sigla]',
-            'description' => '[Descrição]',
+        return [
+            'name' => '[Nome do Plano]',
+            'beginning_term' => '[Data de Inicio]',
+            'end_period' =>  '[Data de Término]',
             'status' => '[Status]',
         ];
     }

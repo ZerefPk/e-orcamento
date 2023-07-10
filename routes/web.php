@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BudgetPlanController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetUnitController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,35 +22,30 @@ Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::group(['prefix' => 'unidades-orcamentarias', 'middleware' => ['auth', 'verified']], function (){
-    
-    Route::get('/',[BudgetUnitController::class, 'show'] )->name('budget-unit.index');
-    
-    Route::get('/novo',[BudgetUnitController::class, 'create'])->name('budget-unit.create');
-    Route::post('/store',[BudgetUnitController::class, 'store'])->name('budget-unit.store');
-    
+Route::group(['prefix' => 'unidades-orcamentarias', 'middleware' => ['auth', 'verified']], function () {
+
+    Route::get('/', [BudgetUnitController::class, 'show'])->name('budget-unit.index');
+
+    Route::get('/novo', [BudgetUnitController::class, 'create'])->name('budget-unit.create');
+    Route::post('/store', [BudgetUnitController::class, 'store'])->name('budget-unit.store');
+
     Route::get('/editar', function () {
         return view('config.budget-unit.create');
     })->name('budget-unit.edit');
     Route::get('{budgetUnit}/detalhes', [BudgetUnitController::class, 'details'])->name('budget-unit.show');
-    
 });
-Route::group(['prefix' => 'projetos', 'middleware' => ['auth', 'verified']], function (){
-    Route::get('/', function () {
-        return view('config.projects.index');
-    })->name('projects.index');
-    Route::get('/novo', function () {
-        return view('config.projects.create');
-    })->name('projects.create');
+
+Route::group(['prefix' => 'projetos', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/', [ProjectController::class, 'show'])->name('projects.index');
+    Route::get('/novo', [ProjectController::class, 'create'])->name('projects.create');
+    Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
     Route::get('/editar', function () {
         return view('config.projects.create');
     })->name('projects.edit');
-    Route::get('/detalhes', function () {
-        return view('config.projects.show');
-    })->name('projects.show');
-    
+    Route::get('{project}/detalhes', [ProjectController::class, 'details'])->name('projects.show');
 });
-Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], function (){
+
+Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
         return view('config.accounts.index');
     })->name('accounts.index');
@@ -61,9 +58,9 @@ Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], funct
     Route::get('/detalhes', function () {
         return view('config.accounts.show');
     })->name('accounts.show');
-    
 });
-Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], function (){
+
+Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', function () {
         return view('config.elements.index');
     })->name('elements.index');
@@ -76,21 +73,15 @@ Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], fu
     Route::get('/detalhes', function () {
         return view('config.elements.show');
     })->name('elements.show');
-    
 });
-Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'verified']], function (){
-    Route::get('/', function () {
-        return view('config.plans.index');
-    })->name('plans.index');
-    Route::get('/novo', function () {
-        return view('config.plans.create');
-    })->name('plans.create');
+
+Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/', [BudgetPlanController::class, 'show'])->name('plans.index');
+    Route::get('/novo', [BudgetPlanController::class, 'create'])->name('plans.create');
+    Route::post('/store', [BudgetPlanController::class, 'store'])->name('plans.store');
     Route::get('/editar', function () {
         return view('config.plans.edit');
     })->name('plans.edit');
-    Route::get('/detalhes', function () {
-        return view('config.plans.show');
-    })->name('plans.show');
-    
+    Route::get('/detalhes', [BudgetPlanController::class, 'details'])->name('plans.show');
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
