@@ -31,7 +31,8 @@
                     <div class="col">
                         <form action="{{ route('budget-unit.index') }}" method="get">
                             <div class="input-group input-group-lg">
-                                <input type="text" value="{{request('q')}}" name="q" class="form-control float-right" placeholder="Search">
+                                <input type="text" value="{{ request('q') }}" name="q"
+                                    class="form-control float-right" placeholder="Search">
                                 <div class="input-group-append">
                                     <button type="submit" class="btn btn-default">
                                         <i class="fas fa-search"></i>
@@ -41,8 +42,6 @@
                         </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -64,11 +63,8 @@
                             <td>{{ $budgetUnit->acronym }}</td>
                             <td>{{ $budgetUnit->description }}</td>
                             <td>
-
-                                <span class="tag tag-success">
-
+                                <span class="{{ $budgetUnit->status ? 'text-success' : 'text-danger' }}">
                                     {{ $budgetUnit->status ? 'Ativo' : 'Desativado' }}
-
                                 </span>
                             </td>
                             <td>
@@ -88,17 +84,19 @@
                                 A Busca não retornou resultados
                             </td>
                         </tr>
-                        
                     @endforelse
 
 
                 </tbody>
             </table>
         </div>
-        <div class="card-footer clearfix">
-            {{ $budgetUnits->links() }}
-        </div>
-
+        @if ($budgetUnits->hasPages())
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    {{ $budgetUnits->links() }}
+                </ul>
+            </div>
+        @endif
     </div>
 @stop
 

@@ -9,7 +9,7 @@
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li class="breadcrumb-item active">Planos Orçamentarios</li>
             </ol>
         </div>
@@ -23,24 +23,25 @@
             <div class="card-tools">
                 <div class="row">
                     <div class="col">
-                        <a href="{{route('plans.create')}}" class="btn btn-success">
+                        <a href="{{ route('plans.create') }}" class="btn btn-success">
                             <i class="fa fa-plus"></i>
                             Adicionar
                         </a>
                     </div>
                     <div class="col">
-                        <div class="input-group input-group-lg">
-                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-default">
-                                    <i class="fas fa-search"></i>
-                                </button>
+                        <form method="GET" action={{ route('plans.index') }}>
+                            <div class="input-group input-group-lg">
+                                <input type="text" value="{{ request('q') }}" name="q"
+                                    class="form-control float-right" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
-
-
             </div>
         </div>
 
@@ -57,37 +58,40 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Plano</td>
-                        <td>Início</td>
-                        <td>Fim</td>
-                        <td><span class="tag tag-success">Ativo</span></td>
-                        <td>
-                            <a href="{{route('plans.show')}}" class="btn btn-primary btn-sm">
-                                <i class="fas fa-folder"></i>
-                                Ver
-                            </a>
-                            <a href="{{route('plans.edit')}}" class="btn btn-info btn-sm">
-                                <i class="fas fa-pencil-alt"></i>
-                                Editar
-                            </a>
-                        </td>
-                    </tr>
-
+                    @forelse ($budgetPlans as $budgetPlan)
+                        <tr>
+                            <td>{{ $budgetPlan->id }}</td>
+                            <td>{{ $budgetPlan->name }}</td>
+                            <td>{{ $budgetPlan->beginning_term }}</td>
+                            <td>{{ $budgetPlan->end_period }}</td>
+                            <td>
+                                <span class="{{ $budgetPlan->status ? 'text-success' : 'text-danger' }}">
+                                    {{ $budgetPlan->status ? 'Ativo' : 'Desativado' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('plans.show') }}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-folder"></i>
+                                    Ver
+                                </a>
+                                <a href="{{ route('plans.edit') }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-pencil-alt"></i>
+                                    Editar
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                    @endforelse
                 </tbody>
             </table>
         </div>
-        <div class="card-footer clearfix">
-            <ul class="pagination pagination-sm m-0 float-right">
-                <li class="page-item"><a class="page-link" href="#">«</a></li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link" href="#">»</a></li>
-            </ul>
-        </div>
-
+        @if ($budgetPlans->hasPages())
+            <div class="card-footer clearfix">
+                <ul class="pagination pagination-sm m-0 float-right">
+                    {{ $budgetPlans->links() }}
+                </ul>
+            </div>
+        @endif
     </div>
 @stop
 

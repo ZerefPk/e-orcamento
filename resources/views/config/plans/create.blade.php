@@ -19,33 +19,39 @@
 
 @section('content')
     <div class="card">
-
-        <form>
+        <form method="POST" action="{{ route('plans.store') }}">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="acronym">Sigla</label>
-                    <input type="text" class="form-control" name="acronym" placeholder="Sigla"
-                        value="{{ old('acronym') }}">
-                    @error('acronym')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="name">Nome do Plano</label>
+                    <input type="text" class="form-control" name="name" placeholder="Plano fantasia"
+                        value="{{ old('name') }}">
+                    @error('name')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="description">Descrição</label>
-                    <input type="text" class="form-control" name="description" placeholder="Nome completo da unidade"
-                        value="{{ old('description') }}">
-                    @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="beginning_term">Data de Inicio</label>
+                    <input type="date" class="form-control" name="beginning_term" value="{{ old('beginning_term') }}">
+                    @error('beginning_term')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="end_period">Data de Término</label>
+                    <input type="date" class="form-control" name="end_period" value="{{ old('end_period') }}">
+                    @error('end_period')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                        <option value="1">Ativo</option>
+                        <option value="0">Desativado</option>
                     </select>
                     @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
