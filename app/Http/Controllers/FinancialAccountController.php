@@ -52,7 +52,7 @@ class FinancialAccountController extends Controller
             if (count($cod_arr) != 5) {
                 $errored_accounts_count++;
                 $errored_accounts_alert_string = $errored_accounts_alert_string . 'COD: ' . $account['COD'] . ', DESCRICAO: ' . $account['DESCRICAO'] . "</br>";
-            } else {
+            } else if (!FinancialAccount::where('cod', '=', $account["COD"])) {
                 $save = FinancialAccount::create([
                     "cod" => $account["COD"],
                     "description" => $account["DESCRICAO"],
@@ -66,6 +66,9 @@ class FinancialAccountController extends Controller
                 } else {
                     $succeeded_accounts_count++;
                 }
+            } else {
+                $errored_accounts_count++;
+                $errored_accounts_alert_string = $errored_accounts_alert_string . 'COD: ' . $account['COD'] . ', DESCRICAO: ' . $account['DESCRICAO'] . "</br>";
             }
         }
 
