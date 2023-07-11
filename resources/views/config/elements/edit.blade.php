@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Elementos de Despesas - Editar')
+@section('title', 'Elementos de Despesas - Editar '.$expenseElement->cod)
 
 @section('content_header')
     <div class="row mb-2">
@@ -10,7 +10,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Elementos de Despesas</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('elements.index') }}">Elementos de Despesas</a></li>
                 <li class="breadcrumb-item active">Editar Elemento</li>
             </ol>
         </div>
@@ -20,40 +20,37 @@
 @section('content')
     <div class="card">
 
-        <form>
+        <form method="POST" action="{{route('elements.update', $expenseElement)}}">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="acronym">Conta Contábil</label>
-                    <input type="text" class="form-control" disabled name="account" placeholder="45584,555,5545"
-                        value="{{ old('account') }}">
-                    @error('account')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                    <label for="account">Conta Contábil</label>
+                    <input type="text" class="form-control" disabled name="account" disabled
+                        value="{{$expenseElement->financialAccount->cod}} - {{$expenseElement->financialAccount->description}}">
+                    
                 </div>
                 <div class="form-group">
-                    <label for="acronym">Código</label>
+                    <label for="cod">Código</label>
                     <input type="text" class="form-control" disabled name="cod" placeholder="Código"
-                        value="{{ old('cod') }}">
-                    @error('cod')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
+                        value="{{ $expenseElement->cod}}">
+                    
                 </div>
                 <div class="form-group">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" name="description" placeholder="Nome completo da unidade"
-                        value="{{ old('description') }}">
+                        value="{{old('description', $expenseElement->description)}}">
                     @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                        <option value="1" @if(old('status', $expenseElement->status))  selected @endif>Ativo</option>
+                        <option value="0" @if(!old('status', $expenseElement->status))  selected @endif>Desativado</option>
                     </select>
                     @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 

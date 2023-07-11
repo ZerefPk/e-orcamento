@@ -43,6 +43,8 @@ Route::group(['prefix' => 'projetos', 'middleware' => ['auth', 'verified']], fun
     Route::post('/store', [ProjectController::class, 'store'])->name('projects.store');
 
     Route::get('{project}/editar', [ProjectController::class, 'edit'])->name('projects.edit');
+    Route::post('{project}/update', [ProjectController::class, 'update'])->name('projects.update');
+
     Route::get('{project}/detalhes', [ProjectController::class, 'details'])->name('projects.show');
 });
 
@@ -65,6 +67,8 @@ Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], fu
     Route::post('/store', [ExpenseElementController::class, 'store'])->name('elements.store');
 
     Route::get('{expenseElement}/editar', [ExpenseElementController::class, 'edit'])->name('elements.edit');
+    Route::post('{expenseElement}/update', [ExpenseElementController::class, 'update'])->name('elements.update');
+    
     Route::get('{expenseElement}/detalhes', [ExpenseElementController::class, 'details'])->name('elements.show');
 });
 

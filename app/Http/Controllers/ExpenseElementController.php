@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExpenseElementUpdateRequest;
 use App\Models\ExpenseElement;
 use App\Models\FinancialAccount;
 use Illuminate\Http\Request;
@@ -92,5 +93,23 @@ class ExpenseElementController extends Controller
     public function details(ExpenseElement $expenseElement): View
     {
         return view('config.elements.show', ['expenseElement' => $expenseElement]);
+    }
+    public function edit(ExpenseElement $expenseElement) : View {
+
+        return view('config.elements.edit', ['expenseElement' => $expenseElement]);
+    }
+    public function update(ExpenseElement $expenseElement, ExpenseElementUpdateRequest $request){
+
+        $update = $expenseElement->update($request->all());
+
+        if (!$update) {
+            Alert::error('Elemento de Despesa', 'Ocorreu um erro ao atualizar.');
+            return redirect()->back();
+        }
+        else {
+            Alert::success('Elemento de Despesa', 'Atualizado com sucesso');
+        }
+        
+        return redirect()->route('elements.index');
     }
 }
