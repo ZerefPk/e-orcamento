@@ -21,8 +21,9 @@ class BudgetPlanRequest extends FormRequest
      */
     public function rules(): array
     {
+        //dd(['name' => 'required|min:2|max:50|unique:budget_plans,name,"'.$this->name]);
         return [
-            'name' => 'required|min:2|max:50|unique:budget_plans,name,except,id',
+            'name' => 'required|min:2|max:50',
             'beginning_term' => 'required',
             'end_period' =>  'required',
             'status' => 'required|boolean',

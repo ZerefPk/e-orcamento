@@ -78,7 +78,9 @@ Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'veri
     Route::get('/novo', [BudgetPlanController::class, 'create'])->name('plans.create');
     Route::post('/store', [BudgetPlanController::class, 'store'])->name('plans.store');
 
-    Route::get('/editar', [BudgetPlanController::class, 'edit'])->name('plans.edit');
-    Route::get('/detalhes', [BudgetPlanController::class, 'details'])->name('plans.show');
+    Route::get('{budgetPlan}/editar', [BudgetPlanController::class, 'edit'])->name('plans.edit');
+    Route::post('{budgetPlan}/update', [BudgetPlanController::class, 'update'])->name('plans.update');
+
+    Route::get('{budgetPlan}/detalhes', [BudgetPlanController::class, 'details'])->name('plans.show');
 });
 require __DIR__ . '/auth.php';

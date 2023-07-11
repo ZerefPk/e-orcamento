@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Unidades Orçamentarias - Inserir')
+@section('title', 'Plano Orçamentário - Inserir')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Inserir Unidades Urçamentarias</h1>
+            <h1>Inserir Plano Orçamentário</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('budget-unit.index') }}">Unidades Orçamentaria</a></li>
-                <li class="breadcrumb-item active">Inserir Unidades Orçamentaria</li>
+                <li class="breadcrumb-item"><a href="{{ route('budget-unit.index') }}">Planos Orçamentários</a></li>
+                <li class="breadcrumb-item active">Inserir Planos Orçamentários</li>
             </ol>
         </div>
     </div>

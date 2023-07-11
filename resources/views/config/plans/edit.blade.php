@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Unidades Orçamentarias - Editar')
+@section('title', 'Plano Orçamentário - Inserir')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Editar Unidades Urçamentarias</h1>
+            <h1>Inserir Plano Orçamentário</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('budget-unit.index') }}">Unidades Orçamentaria</a></li>
-                <li class="breadcrumb-item active">Editar Unidades Orçamentaria</li>
+                <li class="breadcrumb-item"><a href="{{ route('budget-unit.index') }}">Planos Orçamentários</a></li>
+                <li class="breadcrumb-item active">Inserir Planos Orçamentários</li>
             </ol>
         </div>
     </div>
@@ -19,33 +19,41 @@
 
 @section('content')
     <div class="card">
-
-        <form>
+        <form method="POST" action="{{ route('plans.update', $budgetPlan) }}">
+            @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="acronym">Sigla</label>
-                    <input type="text" class="form-control" name="acronym" placeholder="Sigla"
-                        value="{{ old('acronym') }}">
-                    @error('acronym')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="name">Nome do Plano</label>
+                    <input type="text" class="form-control" name="name" placeholder="Plano fantasia"
+                        value="{{ old('name', $budgetPlan->name) }}">
+                    @error('name')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
-                    <label for="description">Descrição</label>
-                    <input type="text" class="form-control" name="description" placeholder="Nome completo da unidade"
-                        value="{{ old('description') }}">
-                    @error('description')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                    <label for="beginning_term">Data de Inicio</label>
+                    <input type="date" class="form-control" name="beginning_term"
+                        value="{{ old('beginning_term', $budgetPlan->beginning_term) }}">
+                    @error('beginning_term')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
+                    <label for="end_period">Data de Término</label>
+                    <input type="date" class="form-control" name="end_period"
+                        value="{{ old('end_period', $budgetPlan->end_period) }}">
+                    @error('end_period')
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
                 <div class="form-group">
                     <label>Status</label>
-                    <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option>Ativo</option>
-                        <option>Desativado</option>
+                    <select class="form-control" name="status">
+                        <option value="1" @if (old('end_period', $budgetPlan->end_period)) selected @endif>Ativo</option>
+                        <option value="0"@if (!old('end_period', $budgetPlan->end_period)) selected @endif>Desativado</option>
                     </select>
                     @error('status')
-                        <div class="alert alert-danger">{{ $message }}</div>
+                        <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>
 
@@ -59,6 +67,7 @@
 @stop
 
 @section('css')
+
 @stop
 
 @section('js')

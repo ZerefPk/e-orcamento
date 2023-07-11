@@ -61,8 +61,8 @@
                         <tr>
                             <td>{{ $budgetPlan->id }}</td>
                             <td>{{ $budgetPlan->name }}</td>
-                            <td>{{ $budgetPlan->beginning_term }}</td>
-                            <td>{{ $budgetPlan->end_period }}</td>
+                            <td>{{ date('d/m/Y', strtotime($budgetPlan->beginning_term)) }}</td>
+                            <td>{{date('d/m/Y', strtotime( $budgetPlan->end_period)) }}</td>
                             <td>
                                 <span class="{{ $budgetPlan->status ? 'text-success' : 'text-danger' }}">
                                     {{ $budgetPlan->status ? 'Ativo' : 'Desativado' }}

@@ -33,15 +33,33 @@ class BudgetPlanController extends Controller
 
         $save = BudgetPlan::create($request);
         if ($save) {
-            Alert::success('Projeto', 'Criado com sucesso');
+            Alert::success('Plano Orçamentário', 'Criado com sucesso');
             return redirect()->route('plans.index');
         }
-        Alert::error('Projeto', 'Erro ao criar');
+        Alert::error('Plano Orçamentário', 'Erro ao criar');
         return redirect()->back();
     }
 
     public function details(BudgetPlan $budgetPlan): View
     {
         return view('config.plans.show', ['budgetPlan' => $budgetPlan]);
+    }
+    
+    public function edit(BudgetPlan $budgetPlan) : View {
+        
+        return view('config.plans.edit', ['budgetPlan' => $budgetPlan]);
+    }
+
+    public function update(BudgetPlan $budgetPlan, BudgetPlanRequest $request){
+        
+        $request = $request->all();
+        $budgetPlan = BudgetPlan::find($budgetPlan->id);
+        $update = $budgetPlan->update($request);
+        if ($update) {
+            Alert::success('Plano Orçamentário', 'Atualizado com sucesso');
+            return redirect()->route('plans.index');
+        }
+        Alert::error('Plano Orçamentário', 'Erro ao Atualizar');
+        return redirect()->back();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\BudgetPlan;
+use App\Observers\BudgetPlanObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,6 +21,15 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
     ];
+    /**
+     * The model observers for your application.
+     *
+     * @var array
+     */
+
+    protected $observers = [
+        BudgetPlan::class => [BudgetPlanObserver::class],
+    ];
 
     /**
      * Register any events for your application.
@@ -26,6 +37,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         //
+
     }
 
     /**
