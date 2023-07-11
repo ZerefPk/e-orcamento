@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 
 class BudgetPlan extends Model
 {
@@ -15,4 +16,10 @@ class BudgetPlan extends Model
         'end_period',
         'status',
     ];
+
+    public function accountingYears() : hasMany {
+        
+        return $this->hasMany(AccountingYear::class);
+
+    }
 }
