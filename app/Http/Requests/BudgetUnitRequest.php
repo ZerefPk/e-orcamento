@@ -22,7 +22,7 @@ class BudgetUnitRequest extends FormRequest
     public function rules(): array
     {
         return  [
-            'acronym' => 'required|min:2|max:10|unique:budget_units,id,except,'.$this->id,
+            'acronym' => 'required|min:2|max:10|unique:budget_units,acronym,'.$this->acronym,
             'description' => 'required|min:2|max:255',
             'status' => 'required|boolean',
         ];

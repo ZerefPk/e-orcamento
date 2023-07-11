@@ -9,7 +9,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ProjectController extends Controller
 {
-    function show(): View
+    public function show(): View
     {
         if (request('q')) {
             $data = request('q');
@@ -22,12 +22,12 @@ class ProjectController extends Controller
         return view('config.projects.index', ['projects' => $projects]);
     }
 
-    function create(): View
+    public function create(): View
     {
         return view('config.projects.create');
     }
 
-    function store(ProjectRequest $request)
+    public function store(ProjectRequest $request)
     {
         $request = $request->all();
 
@@ -44,4 +44,20 @@ class ProjectController extends Controller
     {
         return view('config.projects.show', ['project' => $project]);
     }
+    public function edit(Project $project) : View {
+        return view('config.projects.edit', ['project' => $project]);
+    }
+    public function update(Project $project, ProjectRequest $request)
+    {
+        $request = $request->all();
+
+        $update = $project->update($request);
+        if ($update) {
+            Alert::success('Projeto', 'Atualizado com sucesso');
+            return redirect()->route('projects.index');
+        }
+        Alert::error('Projeto', 'Erro ao Atualizar');
+        return redirect()->back();
+    }
+
 }

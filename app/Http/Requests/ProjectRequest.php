@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class ProjectRequest extends FormRequest
 {
     /**
@@ -22,7 +23,7 @@ class ProjectRequest extends FormRequest
     public function rules(): array
     {
         return  [
-            'cod' => 'required|min:2|unique:projects,cod,except,id',
+            'cod' => 'required|min:2|unique:projects,cod,'.$this->cod,
             'description' => 'required|min:2|max:255',
             'status' => 'required|boolean',
         ];
