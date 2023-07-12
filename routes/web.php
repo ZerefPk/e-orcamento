@@ -32,7 +32,7 @@ Route::group(['prefix' => 'unidades-orcamentarias', 'middleware' => ['auth', 've
 
     Route::get('{budgetUnit}/editar', [BudgetUnitController::class, 'edit'])->name('budget-unit.edit');
     Route::post('{budgetUnit}/update', [BudgetUnitController::class, 'update'])->name('budget-unit.update');
-    
+
     Route::get('{budgetUnit}/detalhes', [BudgetUnitController::class, 'details'])->name('budget-unit.show');
 });
 
@@ -56,7 +56,7 @@ Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], funct
 
     Route::get('{financialAccount}/editar', [FinancialAccountController::class, 'edit'])->name('accounts.edit');
     Route::post('{financialAccount}/update', [FinancialAccountController::class, 'update'])->name('accounts.update');
-    
+
     Route::get('{financialAccount}/detalhes', [FinancialAccountController::class, 'details'])->name('accounts.show');
 });
 
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], fu
 
     Route::get('{expenseElement}/editar', [ExpenseElementController::class, 'edit'])->name('elements.edit');
     Route::post('{expenseElement}/update', [ExpenseElementController::class, 'update'])->name('elements.update');
-    
+
     Route::get('{expenseElement}/detalhes', [ExpenseElementController::class, 'details'])->name('elements.show');
 });
 
@@ -80,6 +80,9 @@ Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'veri
 
     Route::get('{budgetPlan}/editar', [BudgetPlanController::class, 'edit'])->name('plans.edit');
     Route::post('{budgetPlan}/update', [BudgetPlanController::class, 'update'])->name('plans.update');
+
+    Route::get('{budgetPlan}/anos-contabeis', [BudgetPlanController::class, 'editAccountingYears'])->name('plans.updateAccountingYears');
+    Route::post('{budgetPlan}/update-accounting-years', [BudgetPlanController::class, 'updateAccountingYears'])->name('plans.updateAccountingYears');
 
     Route::get('{budgetPlan}/detalhes', [BudgetPlanController::class, 'details'])->name('plans.show');
 });
