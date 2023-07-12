@@ -41,7 +41,7 @@
                         </li>
 
                     </ul>
-                    <a href="{{ route('plans.updateAccountingYears', $budgetPlan) }}"
+                    <a href="{{ route('plans.editAccountingYears', $budgetPlan) }}"
                         class="btn btn-primary btn-block"><b>Atualizar Anos Contábeis</b>
                     </a>
                     <a href="{{ route('budget-unit.edit', $budgetPlan) }}"

@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for={{"year-" . $accountingYear->year}}>{{ $accountingYear->year }}</label>
                         <input type="text" class="form-control" id={{"year-" . $accountingYear->year}} name={{"year-" . $accountingYear->year}} placeholder="123.00"
-                            value="{{ old('year-' . $accountingYear->year, $accountingYear->expectedBudget) }}">
+                            value="{{ old('year-' . $accountingYear->year, $accountingYear->expected_budget) }}">
                         @error('name')
                             <p class="text-danger">{{ $message }}</p>
                         @enderror

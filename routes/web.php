@@ -81,7 +81,7 @@ Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'veri
     Route::get('{budgetPlan}/editar', [BudgetPlanController::class, 'edit'])->name('plans.edit');
     Route::post('{budgetPlan}/update', [BudgetPlanController::class, 'update'])->name('plans.update');
 
-    Route::get('{budgetPlan}/anos-contabeis', [BudgetPlanController::class, 'editAccountingYears'])->name('plans.updateAccountingYears');
+    Route::get('{budgetPlan}/anos-contabeis', [BudgetPlanController::class, 'editAccountingYears'])->name('plans.editAccountingYears');
     Route::post('{budgetPlan}/update-accounting-years', [BudgetPlanController::class, 'updateAccountingYears'])->name('plans.updateAccountingYears');
 
     Route::get('{budgetPlan}/detalhes', [BudgetPlanController::class, 'details'])->name('plans.show');
