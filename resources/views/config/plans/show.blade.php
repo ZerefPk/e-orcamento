@@ -20,10 +20,8 @@
 @section('content')
     <div class="row">
         <div class="col-md-3">
-
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
-
                     <h3 class="text-center">{{ $budgetPlan->name }}</h3>
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
@@ -33,7 +31,7 @@
                         </li>
                         <li class="list-group-item">
                             <b>Fim</b> <a class="float-right">
-                                {{ date('m/d/Y', strtotime($budgetPlan->beginning_term)) }}
+                                {{ date('m/d/Y', strtotime($budgetPlan->end_period)) }}
                             </a>
                         </li>
                         <li class="list-group-item">
@@ -43,10 +41,13 @@
                         </li>
 
                     </ul>
+                    <a href="{{ route('plans.editAccountingYears', $budgetPlan) }}"
+                        class="btn btn-primary btn-block"><b>Atualizar Anos Contábeis</b>
+                    </a>
                     <a href="{{ route('budget-unit.edit', $budgetPlan) }}"
-                        class="btn btn-primary btn-block"><b>Editar</b></a>
+                        class="btn btn-primary btn-block"><b>Editar</b>
+                    </a>
                 </div>
-
             </div>
         </div>
 
@@ -54,20 +55,26 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#grafs" data-toggle="tab">Destribuição do
-                                Orçamento
-                            </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#budgets" data-toggle="tab">Orçamentos</a></li>
-
-                        <li class="nav-item"><a class="nav-link" href="#unocs" data-toggle="tab">Unidades Orçamentárias</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#graphs" data-toggle="tab">
+                                Distribuição do Orçamento
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#budgets" data-toggle="tab">
+                                Orçamentos
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#unocs" data-toggle="tab">
+                                Unidades Orçamentárias
+                            </a>
                         </li>
                     </ul>
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane active" id="grafs">
-
-
+                        <div class="tab-pane active" id="graphs">
                             <div class="card">
                                 <div class="card-header border-0">
                                     <div class="d-flex justify-content-between">
@@ -135,12 +142,7 @@
                                                         class="fas fa-arrow-circle-right"></i></a>
                                             </div>
                                         </div>
-
-
-
                                     </div>
-
-
                                 </div>
                             </div>
                             <div class="position-relative mb-4">
@@ -172,7 +174,7 @@
                         <div class="tab-pane" id="budgets">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Unidades Orçamentárias</h3>
+                                    <h3 class="card-title">Anos Orçamentários</h3>
                                 </div>
 
                                 <div class="card-body p-0">
@@ -182,11 +184,9 @@
                                                 <th>Ano</th>
                                                 <th>Orçamento Previsto</th>
                                                 <th>Orçamento Estimado</th>
-
                                             </tr>
                                         </thead>
                                         <tbody>
-
                                             @foreach ($budgetPlan->accountingYears as $accountingYear)
                                                 <tr>
                                                     <td>{{ $accountingYear->year }}</td>
@@ -199,25 +199,10 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
-
-                                            <tr class="text-bold">
-                                                <td>Total</td>
-                                                <td>
-                                                    58514884
-                                                </td>
-                                                <td>
-                                                    58514884
-                                                </td>
-
-
-                                            </tr>
-
                                         </tbody>
                                     </table>
                                 </div>
-
                             </div>
-
                         </div>
                         <div class="tab-pane" id="unocs">
                             <div class="card">
