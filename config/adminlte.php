@@ -321,7 +321,7 @@ return [
 
         [
             'text' => 'Acompanhamento Orçamentario',
-            'url'  => 'admin/settings',
+            'route'  => 'budget.index',
             'icon' => 'fas fa-fw fa-calculator',
         ],
         [
@@ -356,7 +356,7 @@ return [
             'icon' => 'fas fa-fw fa-object-ungroup',
             'active' => ['elementos/*']
         ],
-       
+
     ],
 
     /*
@@ -415,7 +415,7 @@ return [
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
