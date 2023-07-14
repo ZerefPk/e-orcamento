@@ -39,10 +39,8 @@
                                 </select>
                             </div>
                         </li>
-
-
                     </ul>
-                    <a href="{{ route('projects.edit') }}" class="btn btn-primary btn-block"><b>Editar</b></a>
+                    <a href="{{ route('projects.edit', $project) }}" class="btn btn-primary btn-block"><b>Editar</b></a>
                 </div>
 
             </div>
@@ -52,10 +50,16 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#grafs" data-toggle="tab">Destribuição do
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#grafs" data-toggle="tab">Destribuição do
                                 Orçamento
-                            </a></li>
-                        <li class="nav-item"><a class="nav-link" href="#accouts" data-toggle="tab">Contas</a></li>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#accouts" data-toggle="tab">
+                                Contas
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="card-body">

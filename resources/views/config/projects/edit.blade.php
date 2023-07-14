@@ -39,6 +39,17 @@
                     @enderror
                 </div>
                 <div class="form-group">
+                    <label>Unidade Orçamentária</label>
+                    <select class="form-control" name="budget_unit_id" value="{{ old('budget_unit_id') }}">
+                        @foreach ($budgetUnits as $budgetUnit)
+                            <option value="{{ $budgetUnit->id }}" @if (old('budget_unit_id') == $budgetUnit->id) selected @endif>{{ $budgetUnit->acronym . ' - '. $budgetUnit->description }}</option>
+                        @endforeach
+                    </select>
+                    @error('budget_unit_id')
+                        <p class="text-danger">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status">
                         <option value="1" @if (old('status', $project->status)) selected @endif>Ativo</option>

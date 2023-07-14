@@ -24,7 +24,7 @@ class BudgetUnitRequest extends FormRequest
         return  [
             'acronym' => 'required|min:2|max:10|unique:budget_units,acronym,'.$this->acronym,
             'description' => 'required|min:2|max:255',
-            'status' => 'required|boolean',
+            'status' => 'required|boolean'
         ];
     }
 
@@ -33,7 +33,7 @@ class BudgetUnitRequest extends FormRequest
         return  [
             'acronym' => '[Sigla]',
             'description' => '[Descrição]',
-            'status' => '[Status]',
+            'status' => '[Status]'
         ];
     }
 }
