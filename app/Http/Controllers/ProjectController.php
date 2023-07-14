@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProjectRequest;
+use App\Models\BudgetUnit;
 use App\Models\Project;
 use Illuminate\Contracts\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -24,7 +25,9 @@ class ProjectController extends Controller
 
     public function create(): View
     {
-        return view('config.projects.create');
+        $budgetUnits = BudgetUnit::all();
+
+        return view('config.projects.create', ['budgetUnits' => $budgetUnits]);
     }
 
     public function store(ProjectRequest $request)
@@ -44,9 +47,14 @@ class ProjectController extends Controller
     {
         return view('config.projects.show', ['project' => $project]);
     }
-    public function edit(Project $project) : View {
-        return view('config.projects.edit', ['project' => $project]);
+
+    public function edit(Project $project) : View
+    {
+        $budgetUnits = BudgetUnit::all();
+
+        return view('config.projects.edit', ['project' => $project, 'budgetUnits' => $budgetUnits]);
     }
+
     public function update(Project $project, ProjectRequest $request)
     {
         $request = $request->all();
@@ -59,5 +67,4 @@ class ProjectController extends Controller
         Alert::error('Projeto', 'Erro ao Atualizar');
         return redirect()->back();
     }
-
 }

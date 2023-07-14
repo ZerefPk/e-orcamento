@@ -26,6 +26,7 @@ class ProjectRequest extends FormRequest
             'cod' => 'required|min:2|unique:projects,cod,'.$this->cod,
             'description' => 'required|min:2|max:255',
             'status' => 'required|boolean',
+            'budget_unit_id' => 'required'
         ];
     }
 
@@ -35,6 +36,7 @@ class ProjectRequest extends FormRequest
             'cod' => '[Código]',
             'description' => '[Nome do Projeto]',
             'status' => '[Status]',
+            'budget_unit_id' => '[Unidade Orçamentária]'
         ];
     }
 }
