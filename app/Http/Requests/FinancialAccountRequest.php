@@ -4,13 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FinancialAccountRequest extends FormRequest
-{
+class FinancialAccountRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
+    public function authorize(): bool {
         return true;
     }
 
@@ -19,16 +17,14 @@ class FinancialAccountRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
             'csv' => 'file|required|mimes:csv',
             'delimiter' => 'required',
         ];
     }
 
-    public function attributes(): array
-    {
+    public function attributes(): array {
         return [
             'csv' => '[Arquivo de Contas]',
             'delimiter' => '[Delimitador]',

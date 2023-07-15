@@ -4,14 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
-class ProjectRequest extends FormRequest
-{
+class ProjectRequest extends FormRequest {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
+    public function authorize(): bool {
         return true;
     }
 
@@ -20,23 +17,21 @@ class ProjectRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules(): array
-    {
-        return  [
+    public function rules(): array {
+        return [
             'cod' => 'required|min:2|unique:projects,cod,'.$this->cod,
             'description' => 'required|min:2|max:255',
             'status' => 'required|boolean',
-            'budget_unit_id' => 'required'
+            'budget_unit_id' => 'required',
         ];
     }
 
-    public function attributes(): array
-    {
-        return  [
+    public function attributes(): array {
+        return [
             'cod' => '[Código]',
             'description' => '[Nome do Projeto]',
             'status' => '[Status]',
-            'budget_unit_id' => '[Unidade Orçamentária]'
+            'budget_unit_id' => '[Unidade Orçamentária]',
         ];
     }
 }

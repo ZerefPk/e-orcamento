@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Expense extends Model
-{
+class Expense extends Model {
     use HasFactory;
-    protected $table ='expenses';
-    
+
+    protected $table = 'expenses';
+
     protected $fillable = [
         'type_expense',
         'description',
@@ -29,26 +29,22 @@ class Expense extends Model
         'expense_element_id',
         'project_id',
         'accounting_year_id',
-        'budget_unit_id'
+        'budget_unit_id',
     ];
 
-    public function expenseElement()
-    {
+    public function expenseElement() {
         return $this->belongsTo(ExpenseElement::class);
     }
 
-    public function project()
-    {
+    public function project() {
         return $this->belongsTo(Project::class);
     }
 
-    public function accountingYear()
-    {
+    public function accountingYear() {
         return $this->belongsTo(AccountingYear::class);
     }
 
-    public function budgetUnit()
-    {
+    public function budgetUnit() {
         return $this->belongsTo(BudgetUnit::class);
     }
 }

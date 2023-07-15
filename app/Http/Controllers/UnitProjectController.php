@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
-class UnitProjectController extends Controller
-{
+class UnitProjectController extends Controller {
     //
 }

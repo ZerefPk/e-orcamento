@@ -1,14 +1,12 @@
 <?php
 
 use App\Http\Controllers\BudgetPlanController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BudgetUnitController;
-use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ExpenseElementController;
 use App\Http\Controllers\FinancialAccountController;
 use App\Http\Controllers\PredictedUnitController;
 use App\Http\Controllers\ProjectController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +18,6 @@ use App\Http\Controllers\ProjectController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 
 Route::get('/', function () {
     return view('dashboard');
@@ -93,4 +90,4 @@ Route::group(['prefix' => 'orcamento', 'middleware' => ['auth', 'verified']], fu
     Route::get('/', [PredictedUnitController::class, 'show'])->name('budget.index');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

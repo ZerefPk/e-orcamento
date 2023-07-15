@@ -8,13 +8,11 @@ use App\Models\Project;
 use Illuminate\Contracts\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class ProjectController extends Controller
-{
-    public function show(): View
-    {
+class ProjectController extends Controller {
+    public function show(): View {
         if (request('q')) {
             $data = request('q');
-            $projects = Project::where('description', 'like', $data . '%');
+            $projects = Project::where('description', 'like', $data.'%');
             $projects = $projects->paginate(15);
         } else {
             $projects = Project::paginate(15);
@@ -23,48 +21,47 @@ class ProjectController extends Controller
         return view('config.projects.index', ['projects' => $projects]);
     }
 
-    public function create(): View
-    {
+    public function create(): View {
         $budgetUnits = BudgetUnit::all();
 
         return view('config.projects.create', ['budgetUnits' => $budgetUnits]);
     }
 
-    public function store(ProjectRequest $request)
-    {
+    public function store(ProjectRequest $request) {
         $request = $request->all();
 
         $save = Project::create($request);
         if ($save) {
             Alert::success('Projeto', 'Criado com sucesso');
+
             return redirect()->route('projects.index');
         }
         Alert::error('Projeto', 'Erro ao criar');
+
         return redirect()->back();
     }
 
-    public function details(Project $project): View
-    {
+    public function details(Project $project): View {
         return view('config.projects.show', ['project' => $project]);
     }
 
-    public function edit(Project $project) : View
-    {
+    public function edit(Project $project): View {
         $budgetUnits = BudgetUnit::all();
 
         return view('config.projects.edit', ['project' => $project, 'budgetUnits' => $budgetUnits]);
     }
 
-    public function update(Project $project, ProjectRequest $request)
-    {
+    public function update(Project $project, ProjectRequest $request) {
         $request = $request->all();
 
         $update = $project->update($request);
         if ($update) {
             Alert::success('Projeto', 'Atualizado com sucesso');
+
             return redirect()->route('projects.index');
         }
         Alert::error('Projeto', 'Erro ao Atualizar');
+
         return redirect()->back();
     }
 }

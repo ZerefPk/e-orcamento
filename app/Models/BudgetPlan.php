@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 
-class BudgetPlan extends Model
-{
+class BudgetPlan extends Model {
     use HasFactory;
+
     protected $table = 'budget_plans';
+
     protected $fillable = [
         'name',
         'beginning_term',
@@ -17,8 +18,8 @@ class BudgetPlan extends Model
         'status',
     ];
 
-    public function accountingYears() : hasMany {
-        
+    public function accountingYears(): hasMany {
+
         return $this->hasMany(AccountingYear::class);
 
     }

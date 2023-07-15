@@ -1,0 +1,10 @@
+{
+    "laravel-pint.enable": true,
+    "laravel-pint.runInLaravelSail": false,
+    "laravel-pint.executablePath": "vendor/bin/pint",
+    "laravel-pint.configPath": "pint.json",
+    "[php]": {
+        "editor.defaultFormatter": "open-southeners.laravel-pint",
+        "editor.formatOnSave": true
+    }
+}
