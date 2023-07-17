@@ -19,13 +19,13 @@ class ExpenseElementController extends Controller {
             $expenseElements = ExpenseElement::paginate(15);
         }
 
-        return view('config.elements.index', ['expenseElements' => $expenseElements]);
+        return view('expense-element.index', ['expenseElements' => $expenseElements]);
     }
 
     public function create(): View {
         $natureExpenses = NatureExpense::all();
 
-        return view('config.elements.create', ['natureExpenses' => $natureExpenses]);
+        return view('expense-element.create', ['natureExpenses' => $natureExpenses]);
     }
 
     public function store(Request $request) {
@@ -87,12 +87,12 @@ class ExpenseElementController extends Controller {
     }
 
     public function details(ExpenseElement $expenseElement): View {
-        return view('config.elements.show', ['expenseElement' => $expenseElement]);
+        return view('expense-element.show', ['expenseElement' => $expenseElement]);
     }
 
     public function edit(ExpenseElement $expenseElement): View {
 
-        return view('config.elements.edit', ['expenseElement' => $expenseElement]);
+        return view('expense-element.edit', ['expenseElement' => $expenseElement]);
     }
 
     public function update(ExpenseElement $expenseElement, ExpenseElementUpdateRequest $request) {

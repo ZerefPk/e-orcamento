@@ -12,18 +12,18 @@ class NatureExpenseController extends Controller {
     public function show(): View {
         if (request('q')) {
             $data = request('q');
-            
+
             $natureExpenses = NatureExpense::where('description', 'like', $data.'%');
             $natureExpenses = $natureExpenses->paginate(15);
         } else {
             $natureExpenses = NatureExpense::paginate(15);
         }
 
-        return view('config.nature-expense.index', ['natureExpenses' => $natureExpenses]);
+        return view('nature-expense.index', ['natureExpenses' => $natureExpenses]);
     }
 
     public function create(): View {
-        return view('config.nature-expense.create');
+        return view('nature-expense.create');
     }
 
     public function store(Request $request) {
@@ -77,13 +77,13 @@ class NatureExpenseController extends Controller {
 
         return redirect()->route('natureExpense.index');
     }
-    
+
     public function details(NatureExpense $natureExpense): View {
-        return view('config.nature-expense.show', ['natureExpense' => $natureExpense]);
+        return view('nature-expense.show', ['natureExpense' => $natureExpense]);
     }
 
     public function edit(NatureExpense $natureExpense): View {
-        return view('config.nature-expense.edit', ['natureExpense' => $natureExpense]);
+        return view('nature-expense.edit', ['natureExpense' => $natureExpense]);
     }
 
     public function update(NatureExpense $natureExpense, NatureExpenseUpdateRequest $request) {

@@ -17,7 +17,7 @@ class ExpenseController extends Controller {
         }
 
         return view(
-            'config.budget-unit.index',
+            'budget-unit.index',
             ['expenses' => $expenses]
         );
 

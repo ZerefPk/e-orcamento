@@ -19,11 +19,11 @@ class BudgetPlanController extends Controller {
             $budgetPlans = BudgetPlan::paginate(15);
         }
 
-        return view('config.plans.index', ['budgetPlans' => $budgetPlans]);
+        return view('budget-plan.index', ['budgetPlans' => $budgetPlans]);
     }
 
     public function create(): View {
-        return view('config.plans.create');
+        return view('budget-plan.create');
     }
 
     public function store(BudgetPlanRequest $request) {
@@ -41,11 +41,11 @@ class BudgetPlanController extends Controller {
     }
 
     public function details(BudgetPlan $budgetPlan): View {
-        return view('config.plans.show', ['budgetPlan' => $budgetPlan]);
+        return view('budget-plan.show', ['budgetPlan' => $budgetPlan]);
     }
 
     public function editAccountingYears(BudgetPlan $budgetPlan): View {
-        return view('config.plans.update-accounting-years', ['budgetPlan' => $budgetPlan]);
+        return view('budget-plan.update-accounting-years', ['budgetPlan' => $budgetPlan]);
     }
 
     public function updateAccountingYears(Request $request, BudgetPlan $budgetPlan) {
@@ -64,7 +64,7 @@ class BudgetPlanController extends Controller {
 
     public function edit(BudgetPlan $budgetPlan): View {
 
-        return view('config.plans.edit', ['budgetPlan' => $budgetPlan]);
+        return view('budget-plan.edit', ['budgetPlan' => $budgetPlan]);
     }
 
     public function update(BudgetPlan $budgetPlan, BudgetPlanRequest $request) {

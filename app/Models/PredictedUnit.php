@@ -18,7 +18,8 @@ class PredictedUnit extends Model {
         'percentage',
         'status',
     ];
-    public function unit() : BelongsTo {
+
+    public function unit(): BelongsTo {
         return $this->belongsTo(BudgetUnit::class);
     }
 }
