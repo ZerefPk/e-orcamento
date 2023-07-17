@@ -5,13 +5,13 @@
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Naturas das Despesas - detalhes</h1>
+            <h1>Detalhes da Natureza de Despesas <b>{{ $natureExpense->cod }}</b></h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('natureExpense.index') }}">Naturas das Despesas</a></li>
-                <li class="breadcrumb-item active">Naturas das Despesas - detalhes</li>
+                <li class="breadcrumb-item"><a href="{{ route('natureExpense.index') }}">Natureza das Despesas</a></li>
+                <li class="breadcrumb-item active">Detalhes ({{ $natureExpense->cod }})</li>
             </ol>
         </div>
     </div>
@@ -20,15 +20,14 @@
 @section('content')
     <div class="row">
         <div class="col-md-3">
-
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
-
-                    <h3 class="profile-username text-center">422.4.578.2</h3>
-                    <p class="text-muted text-center">Diretoria de Tencologia da Informação</p>
+                    <h3 class="profile-username text-center">{{ $natureExpense->cod }}</h3>
+                    <p class="text-muted text-center">{{ $natureExpense->description }}</p>
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>Status</b> <a class="float-right">Ativo</a>
+                            <b>Status</b> <a
+                                class="float-right {{ $natureExpense->status ? 'text-success' : 'text-danger' }}">{{ $natureExpense->status ? 'Ativado' : 'Desativado' }}</a>
                         </li>
 
                         <li class="list-group-item">
@@ -42,41 +41,42 @@
 
 
                     </ul>
-                    <a href="{{ route('natureExpense.edit') }}" class="btn btn-primary btn-block"><b>Editar</b></a>
+                    <a href="{{ route('natureExpense.edit', $natureExpense) }}"
+                        class="btn btn-primary btn-block"><b>Editar</b></a>
                 </div>
-
             </div>
         </div>
 
         <div class="col-md-9">
+            <h2>Elementos de Despesa</h2>
             <div class="card">
                 <div class="card-body p-0">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Elemento</th>
-                                <th>2024</th>
-                                <th>2025</th>
-                                <th>2026</th>
-                                <th>2027</th>
+                                <th>Código</th>
+                                <th>Descrição</th>
+                                <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>03 - abs</td>
-                                <td>
-                                    58514884
-                                </td>
-                                <td>
-                                    58514884
-                                </td>
-                                <td>
-                                    58514884
-                                </td>
-                                <td>
-                                    58514884
-                                </td>
-                            </tr>
+                            @forelse ($natureExpense->elements as $element)
+                                <tr>
+                                    <td>{{ $element->cod }}</td>
+                                    <td>{{ $element->description }}</td>
+                                    <td>
+                                        <a href="{{ route('elements.show', $element) }}" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-folder"></i>
+                                            Ver
+                                        </a>
+                                        <a href="{{ route('elements.edit', $element) }}" class="btn btn-info btn-sm">
+                                            <i class="fas fa-pencil-alt"></i>
+                                            Editar
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                            @endforelse
                             <tr class="text-bold">
                                 <td>Total</td>
                                 <td>
@@ -85,14 +85,7 @@
                                 <td>
                                     58514884
                                 </td>
-                                <td>
-                                    58514884
-                                </td>
-                                <td>
-                                    58514884
-                                </td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>

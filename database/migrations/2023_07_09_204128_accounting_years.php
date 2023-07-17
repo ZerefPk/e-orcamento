@@ -4,18 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         //
-        Schema::create('accounting_years', function(Blueprint $table){
+        Schema::create('accounting_years', function (Blueprint $table) {
             $table->id();
             $table->string('year');
-            $table->decimal('expected_budget', 20,2);
+            $table->decimal('expected_budget', 20, 2);
             $table->boolean('status')->default(true);
             $table->unsignedBigInteger('budget_plan_id');
             $table->timestamps();
@@ -30,8 +28,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         //
         Schema::dropIfExists('accounting_years');
     }

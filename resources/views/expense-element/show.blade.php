@@ -39,12 +39,10 @@
                                 </select>
                             </div>
                         </li>
-
-
                     </ul>
-                    <a href="{{ route('elements.edit') }}" class="btn btn-primary btn-block"><b>Editar</b></a>
+                    <a href="{{ route('elements.edit', $expenseElement) }}"
+                        class="btn btn-primary btn-block"><b>Editar</b></a>
                 </div>
-
             </div>
         </div>
 

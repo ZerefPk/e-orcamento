@@ -4,18 +4,16 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         //
-        Schema::create('expenses', function(Blueprint $table){
+        Schema::create('expenses', function (Blueprint $table) {
             $table->id();
             $table->enum('type_expense', [
-                'FOLHA DE PAGAMENTO', 
+                'FOLHA DE PAGAMENTO',
                 'MATERIAL PERMANENTE',
                 'MATERIAL DE CONSUMO',
                 'SERVIÇOS',
@@ -28,7 +26,7 @@ return new class extends Migration
                 'MÊS',
                 'SERVIÇO',
                 'HORA',
-                'DIA'
+                'DIA',
             ]);
             $table->decimal('amount', 10, 2);
             $table->decimal('installment_value', 15, 2);
@@ -45,7 +43,7 @@ return new class extends Migration
                 '9',
                 '10',
                 '11',
-                '12'
+                '12',
             ])->nullable();
             $table->enum('renewal_month', [
                 '1',
@@ -59,7 +57,7 @@ return new class extends Migration
                 '9',
                 '10',
                 '11',
-                '12'
+                '12',
             ])->nullable();
             $table->decimal('previous_residual', 15, 2)->default(0.00);
             $table->decimal('margin', 3, 2)->default(0.00);
@@ -88,14 +86,13 @@ return new class extends Migration
                 ->references('id')
                 ->on('budget_units')
                 ->onDelete('restrict');
-        }); 
+        });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         //
         Schema::dropIfExists('expenses');
     }
