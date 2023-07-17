@@ -18,13 +18,13 @@ class ProjectController extends Controller {
             $projects = Project::paginate(15);
         }
 
-        return view('config.projects.index', ['projects' => $projects]);
+        return view('project.index', ['projects' => $projects]);
     }
 
     public function create(): View {
         $budgetUnits = BudgetUnit::all();
 
-        return view('config.projects.create', ['budgetUnits' => $budgetUnits]);
+        return view('project.create', ['budgetUnits' => $budgetUnits]);
     }
 
     public function store(ProjectRequest $request) {
@@ -42,13 +42,13 @@ class ProjectController extends Controller {
     }
 
     public function details(Project $project): View {
-        return view('config.projects.show', ['project' => $project]);
+        return view('project.show', ['project' => $project]);
     }
 
     public function edit(Project $project): View {
         $budgetUnits = BudgetUnit::all();
 
-        return view('config.projects.edit', ['project' => $project, 'budgetUnits' => $budgetUnits]);
+        return view('project.edit', ['project' => $project, 'budgetUnits' => $budgetUnits]);
     }
 
     public function update(Project $project, ProjectRequest $request) {

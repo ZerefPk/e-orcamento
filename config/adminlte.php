@@ -292,12 +292,12 @@ return [
     'menu' => [
         // Navbar items:
         [
-            'type'         => 'navbar-search',
-            'text'         => 'search',
+            'type' => 'navbar-search',
+            'text' => 'search',
             'topnav_right' => true,
         ],
         [
-            'type'         => 'fullscreen-widget',
+            'type' => 'fullscreen-widget',
             'topnav_right' => true,
         ],
 
@@ -308,12 +308,12 @@ return [
         ],
         [
             'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'url' => 'admin/blog',
+            'can' => 'manage-blog',
         ],
         [
             'text' => 'Dashboard',
-            'route'  => 'dashboard',
+            'route' => 'dashboard',
             'icon' => 'fas fa-fw fa-chart-line',
             'active' => ['/'],
         ],
@@ -321,40 +321,40 @@ return [
 
         [
             'text' => 'Acompanhamento Orçamentario',
-            'route'  => 'budget.index',
+            'route' => 'budget.index',
             'icon' => 'fas fa-fw fa-calculator',
         ],
         [
             'text' => 'Plano Orçamentario',
-            'route'  => 'plans.index',
+            'route' => 'plans.index',
             'icon' => 'fas fa-fw  fa-building',
-            'active' => ['planos-orcamentarios/*']
+            'active' => ['planos-orcamentarios/*'],
         ],
 
         ['header' => 'Configurações Basícas'],
         [
             'text' => 'Unidades Orçamentarias',
-            'route'  => 'budget-unit.index',
+            'route' => 'budget-unit.index',
             'icon' => 'fas fa-fw fa-university',
-            'active' => ['unidades-orcamentarias/*']
+            'active' => ['unidades-orcamentarias/*'],
         ],
         [
             'text' => 'Projetos',
-            'route'  => 'projects.index',
+            'route' => 'projects.index',
             'icon' => 'fas fa-fw fa-folder-open',
-            'active' => ['projetos/*']
+            'active' => ['projetos/*'],
         ],
         [
             'text' => 'Contas Contábeis',
-            'route'  => 'accounts.index',
+            'route' => 'accounts.index',
             'icon' => 'fas fa-fw fa-object-group',
-            'active' => ['contas/*']
+            'active' => ['contas/*'],
         ],
         [
             'text' => 'Elementos de Despesas',
-            'route'  => 'elements.index',
+            'route' => 'elements.index',
             'icon' => 'fas fa-fw fa-object-ungroup',
-            'active' => ['elementos/*']
+            'active' => ['elementos/*'],
         ],
 
     ],
@@ -461,6 +461,31 @@ return [
                     'type' => 'js',
                     'asset' => false,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',
+                ],
+            ],
+        ],
+        'moment' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/moment/moment-with-locales.js',
+                ],
+            ],
+        ],
+        'daterangepicker' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/daterangepicker/daterangepicker.css',
+                ],
+                [
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/daterangepicker/daterangepicker.js',
                 ],
             ],
         ],

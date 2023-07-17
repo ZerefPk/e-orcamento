@@ -13,16 +13,16 @@ class FinancialAccountController extends Controller {
         if (request('q')) {
             $data = request('q');
             $financialAccounts = FinancialAccount::where('description', 'like', $data.'%');
-            $financialAccounts = $financialAccounts->paginate(15);
+            $financialAccounts = $financialAccounts->paginate(2);
         } else {
-            $financialAccounts = FinancialAccount::paginate(15);
+            $financialAccounts = FinancialAccount::paginate(2);
         }
 
-        return view('config.accounts.index', ['financialAccounts' => $financialAccounts]);
+        return view('financial-account.index', ['financialAccounts' => $financialAccounts]);
     }
 
     public function create(): View {
-        return view('config.accounts.create');
+        return view('financial-account.create');
     }
 
     public function store(Request $request) {
@@ -78,11 +78,11 @@ class FinancialAccountController extends Controller {
     }
 
     public function details(FinancialAccount $financialAccount): View {
-        return view('config.accounts.show', ['financialAccount' => $financialAccount]);
+        return view('financial-account.show', ['financialAccount' => $financialAccount]);
     }
 
     public function edit(FinancialAccount $financialAccount): View {
-        return view('config.accounts.edit', ['financialAccount' => $financialAccount]);
+        return view('financial-account.edit', ['financialAccount' => $financialAccount]);
     }
 
     public function update(FinancialAccount $financialAccount, FinancialAccountUpdateRequest $request) {

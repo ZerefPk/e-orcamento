@@ -18,13 +18,13 @@ class BudgetUnitController extends Controller {
         }
 
         return view(
-            'config.budget-unit.index',
+            'budget-unit.index',
             ['budgetUnits' => $budgetUnits]
         );
     }
 
     public function create(): View {
-        return view('config.budget-unit.create');
+        return view('budget-unit.create');
     }
 
     public function store(BudgetUnitRequest $request) {
@@ -42,12 +42,12 @@ class BudgetUnitController extends Controller {
     }
 
     public function details(BudgetUnit $budgetUnit) {
-        return view('config.budget-unit.show', ['budgetUnit' => $budgetUnit]);
+        return view('budget-unit.show', ['budgetUnit' => $budgetUnit]);
     }
 
     public function edit(BudgetUnit $budgetUnit): View {
 
-        return view('config.budget-unit.edit', ['budgetUnit' => $budgetUnit]);
+        return view('budget-unit.edit', ['budgetUnit' => $budgetUnit]);
     }
 
     public function update(BudgetUnit $budgetUnit, BudgetUnitRequest $request) {
