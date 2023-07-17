@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FinancialAccount extends Model {
+class NatureExpense extends Model {
     use HasFactory;
 
-    protected $table = 'financial_accounts';
+    protected $table = 'nature_expenses';
 
     protected $fillable = [
         'cod',

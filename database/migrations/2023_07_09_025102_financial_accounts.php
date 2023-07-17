@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('financial_accounts', function(Blueprint $table){
+        Schema::create('nature_expenses', function(Blueprint $table){
             $table->id();
             $table->string('cod')->unique();
             $table->string('description');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('financial_accounts');
+        Schema::dropIfExists('nature_expenses');
     }
 };

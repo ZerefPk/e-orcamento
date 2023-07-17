@@ -16,8 +16,14 @@ return new class extends Migration
             $table->id();
             $table->string('cod')->unique();
             $table->string('description');
+            $table->unsignedBigInteger('budget_unit_id');
             $table->boolean('status')->default(true);
             $table->timestamps();
+
+            $table->foreign('budget_unit_id')
+                ->references('id')
+                ->on('budget_units')
+                ->onDelete('restrict');
         });
     }
 

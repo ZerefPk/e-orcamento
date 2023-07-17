@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Contas Contábeis - Inserir')
+@section('title', 'Natureza de desepesa - Inserir')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Inserir Contas</h1>
+            <h1>Inserir Natureza</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Contas Contábeis</a></li>
-                <li class="breadcrumb-item active">Inserir Contas</li>
+                <li class="breadcrumb-item"><a href="{{ route('natureExpense.index') }}">Natureza de desepesa</a></li>
+                <li class="breadcrumb-item active">Inserir Natureza</li>
             </ol>
         </div>
     </div>
@@ -20,7 +20,7 @@
 @section('content')
     <div class="card">
 
-        <form method="POST" action={{ route('accounts.store') }} enctype="multipart/form-data">
+        <form method="POST" action={{ route('natureExpense.store') }} enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group">

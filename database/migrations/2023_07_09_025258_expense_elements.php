@@ -16,13 +16,13 @@ return new class extends Migration
             $table->id();
             $table->string('cod');
             $table->string('description');
-            $table->unsignedBigInteger('financial_account_id');
+            $table->unsignedBigInteger('nature_expense_id');
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            $table->foreign('financial_account_id')
+            $table->foreign('nature_expense_id')
                 ->references('id')
-                ->on('financial_accounts')
+                ->on('nature_expenses')
                 ->onDelete('restrict');
         });
     }

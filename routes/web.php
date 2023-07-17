@@ -3,7 +3,7 @@
 use App\Http\Controllers\BudgetPlanController;
 use App\Http\Controllers\BudgetUnitController;
 use App\Http\Controllers\ExpenseElementController;
-use App\Http\Controllers\FinancialAccountController;
+use App\Http\Controllers\NatureExpenseController;
 use App\Http\Controllers\PredictedUnitController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -47,16 +47,16 @@ Route::group(['prefix' => 'projetos', 'middleware' => ['auth', 'verified']], fun
     Route::get('{project}/detalhes', [ProjectController::class, 'details'])->name('projects.show');
 });
 
-Route::group(['prefix' => 'contas', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/', [FinancialAccountController::class, 'show'])->name('accounts.index');
+Route::group(['prefix' => 'naturezas-das-despesas', 'middleware' => ['auth', 'verified']], function () {
+    Route::get('/', [NatureExpenseController::class, 'show'])->name('natureExpense.index');
 
-    Route::get('/novo', [FinancialAccountController::class, 'create'])->name('accounts.create');
-    Route::post('/store', [FinancialAccountController::class, 'store'])->name('accounts.store');
+    Route::get('/novo', [NatureExpenseController::class, 'create'])->name('natureExpense.create');
+    Route::post('/store', [NatureExpenseController::class, 'store'])->name('natureExpense.store');
 
-    Route::get('{financialAccount}/editar', [FinancialAccountController::class, 'edit'])->name('accounts.edit');
-    Route::post('{financialAccount}/update', [FinancialAccountController::class, 'update'])->name('accounts.update');
+    Route::get('{natureExpense}/editar', [NatureExpenseController::class, 'edit'])->name('natureExpense.edit');
+    Route::post('{natureExpense}/update', [NatureExpenseController::class, 'update'])->name('natureExpense.update');
 
-    Route::get('{financialAccount}/detalhes', [FinancialAccountController::class, 'details'])->name('accounts.show');
+    Route::get('{natureExpense}/detalhes', [NatureExpenseController::class, 'details'])->name('natureExpense.show');
 });
 
 Route::group(['prefix' => 'elementos', 'middleware' => ['auth', 'verified']], function () {

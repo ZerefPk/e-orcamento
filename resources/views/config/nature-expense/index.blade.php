@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Contas Contábeis')
+@section('title', 'Naturezas das Despesas')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Contas Contábeis</h1>
+            <h1>Naturezas das Despesas</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Contas Contábeis</li>
+                <li class="breadcrumb-item active">Naturezas das Despesas</li>
             </ol>
         </div>
     </div>
@@ -22,13 +22,13 @@
             <div class="card-tools">
                 <div class="row">
                     <div class="col">
-                        <a href="{{ route('accounts.create') }}" class="btn btn-success">
+                        <a href="{{ route('natureExpense.create') }}" class="btn btn-success">
                             <i class="fa fa-plus"></i>
                             Adicionar
                         </a>
                     </div>
                     <div class="col">
-                        <form method="GET" action={{ route('accounts.index') }}>
+                        <form method="GET" action={{ route('natureExpense.index') }}>
                             <div class="input-group input-group-lg">
                                 <input type="text" value="{{ request('q') }}" name="q"
                                     class="form-control float-right" placeholder="Search">
@@ -57,26 +57,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($financialAccounts as $financialAccount)
+                    @forelse ($natureExpenses as $natureExpense)
                         <tr>
-                            <td>{{ $financialAccount->id }}</td>
-                            <td>{{ $financialAccount->cod }}</td>
-                            <td>{{ $financialAccount->description }}</td>
+                            <td>{{ $natureExpense->id }}</td>
+                            <td>{{ $natureExpense->cod }}</td>
+                            <td>{{ $natureExpense->description }}</td>
                             <td class="text-uppercase">
-                                {{ $financialAccount->type ? 'Corrente' : 'Capital' }}
+                                {{ $natureExpense->type ? 'Corrente' : 'Capital' }}
 
                             </td>
                             <td>
-                                <span class="{{ $financialAccount->status ? 'text-success' : 'text-danger' }}">
-                                    {{ $financialAccount->status ? 'Ativo' : 'Desativado' }}
+                                <span class="{{ $natureExpense->status ? 'text-success' : 'text-danger' }}">
+                                    {{ $natureExpense->status ? 'Ativo' : 'Desativado' }}
                                 </span>
                             </td>
                             <td>
-                                <a href="{{ route('accounts.show', $financialAccount) }}" class="btn btn-primary btn-sm">
+                                <a href="{{ route('natureExpense.show', $natureExpense) }}" class="btn btn-primary btn-sm">
                                     <i class="fas fa-folder"></i>
                                     Ver
                                 </a>
-                                <a href="{{ route('accounts.edit', $financialAccount) }}" class="btn btn-info btn-sm">
+                                <a href="{{ route('natureExpense.edit', $natureExpense) }}" class="btn btn-info btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                     Editar
                                 </a>
@@ -90,10 +90,10 @@
                 </tbody>
             </table>
         </div>
-        @if ($financialAccounts->hasPages())
+        @if ($natureExpenses->hasPages())
             <div class="card-footer clearfix">
                 <ul class="pagination pagination-sm m-0 float-right">
-                    {{ $financialAccounts->links() }}
+                    {{ $natureExpenses->links() }}
                 </ul>
             </div>
         @endif

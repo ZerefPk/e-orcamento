@@ -345,10 +345,10 @@ return [
             'active' => ['projetos/*']
         ],
         [
-            'text' => 'Contas Contábeis',
-            'route'  => 'accounts.index',
+            'text' => 'Naturezas das Despesas',
+            'route'  => 'natureExpense.index',
             'icon' => 'fas fa-fw fa-object-group',
-            'active' => ['contas/*']
+            'active' => ['naturezas-das-despesas/*']
         ],
         [
             'text' => 'Elementos de Despesas',

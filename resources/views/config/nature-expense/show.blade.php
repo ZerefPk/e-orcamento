@@ -1,17 +1,17 @@
 @extends('adminlte::page')
 
-@section('title', 'Conta Contábeis - Detalhes')
+@section('title', 'Naturas das Despesas - Detalhes')
 
 @section('content_header')
     <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Conta Contábeis - detalhes</h1>
+            <h1>Naturas das Despesas - detalhes</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Conta Contábeis</a></li>
-                <li class="breadcrumb-item active">Conta Contábeis - detalhes</li>
+                <li class="breadcrumb-item"><a href="{{ route('natureExpense.index') }}">Naturas das Despesas</a></li>
+                <li class="breadcrumb-item active">Naturas das Despesas - detalhes</li>
             </ol>
         </div>
     </div>
@@ -42,7 +42,7 @@
 
 
                     </ul>
-                    <a href="{{ route('accounts.edit') }}" class="btn btn-primary btn-block"><b>Editar</b></a>
+                    <a href="{{ route('natureExpense.edit') }}" class="btn btn-primary btn-block"><b>Editar</b></a>
                 </div>
 
             </div>
