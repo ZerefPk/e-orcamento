@@ -321,7 +321,7 @@ return [
 
         [
             'text' => 'Acompanhamento Orçamentario',
-            'route'  => 'budget.index',
+            'url'  => 'budget.index',
             'icon' => 'fas fa-fw fa-calculator',
         ],
         [

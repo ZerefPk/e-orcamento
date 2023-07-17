@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Elementos de Despesas - Editar '.$expenseElement->cod)
+@section('title', 'Elementos de Despesas - Editar ' . $expenseElement->cod)
 
 @section('content_header')
     <div class="row mb-2">
@@ -20,25 +20,25 @@
 @section('content')
     <div class="card">
 
-        <form method="POST" action="{{route('elements.update', $expenseElement)}}">
+        <form method="POST" action="{{ route('elements.update', $expenseElement) }}">
             @csrf
             <div class="card-body">
                 <div class="form-group">
                     <label for="account">Conta Contábil</label>
                     <input type="text" class="form-control" disabled name="account" disabled
-                        value="{{$expenseElement->financialAccount->cod}} - {{$expenseElement->financialAccount->description}}">
-                    
+                        value="{{ $expenseElement->natureExpense->cod }} - {{ $expenseElement->natureExpense->description }}">
+
                 </div>
                 <div class="form-group">
                     <label for="cod">Código</label>
                     <input type="text" class="form-control" disabled name="cod" placeholder="Código"
-                        value="{{ $expenseElement->cod}}">
-                    
+                        value="{{ $expenseElement->cod }}">
+
                 </div>
                 <div class="form-group">
                     <label for="description">Descrição</label>
                     <input type="text" class="form-control" name="description" placeholder="Nome completo da unidade"
-                        value="{{old('description', $expenseElement->description)}}">
+                        value="{{ old('description', $expenseElement->description) }}">
                     @error('description')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
@@ -46,8 +46,8 @@
                 <div class="form-group">
                     <label>Status</label>
                     <select class="form-control" name="status" value="{{ old('status') }}">
-                        <option value="1" @if(old('status', $expenseElement->status))  selected @endif>Ativo</option>
-                        <option value="0" @if(!old('status', $expenseElement->status))  selected @endif>Desativado</option>
+                        <option value="1" @if (old('status', $expenseElement->status)) selected @endif>Ativo</option>
+                        <option value="0" @if (!old('status', $expenseElement->status)) selected @endif>Desativado</option>
                     </select>
                     @error('status')
                         <p class="text-danger">{{ $message }}</p>

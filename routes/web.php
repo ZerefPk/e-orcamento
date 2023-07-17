@@ -84,10 +84,13 @@ Route::group(['prefix' => 'planos-orcamentarios', 'middleware' => ['auth', 'veri
     Route::post('{budgetPlan}/update-accounting-years', [BudgetPlanController::class, 'updateAccountingYears'])->name('plans.updateAccountingYears');
 
     Route::get('{budgetPlan}/detalhes', [BudgetPlanController::class, 'details'])->name('plans.show');
+
+    Route::group(['prefix' => '{budgetPlan}/unidade-do-orcamento'], function(){
+        Route::get('/', [PredictedUnitController::class, 'show'])->name('plans.unit.index');
+        Route::get('/novo', [PredictedUnitController::class, 'create'])->name('plans.unit.create');
+        Route::post('/store', [PredictedUnitController::class, 'store'])->name('plans.unit.store');
+    });
 });
 
-Route::group(['prefix' => 'orcamento', 'middleware' => ['auth', 'verified']], function () {
-    Route::get('/', [PredictedUnitController::class, 'show'])->name('budget.index');
-});
 
 require __DIR__.'/auth.php';

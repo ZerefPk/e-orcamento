@@ -14,13 +14,13 @@ class ExpenseElement extends Model {
     protected $fillable = [
         'cod',
         'description',
-        'financial_account_id',
+        'nature_expense_id',
         'status',
     ];
 
-    public function financialAccount(): BelongsTo {
+    public function natureExpense(): BelongsTo {
 
-        return $this->belongsTo(FinancialAccount::class, 'financial_account_id', 'id');
+        return $this->belongsTo(NatureExpense::class, 'nature_expense_id', 'id');
 
     }
 }

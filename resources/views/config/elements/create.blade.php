@@ -10,7 +10,7 @@
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Elementos de Despesas</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('elements.index') }}">Elementos de Despesas</a></li>
                 <li class="breadcrumb-item active">Inserir Elemento</li>
             </ol>
         </div>
@@ -19,18 +19,18 @@
 
 @section('content')
     <div class="card">
-        <form method="POST" action={{ route("elements.store") }} enctype="multipart/form-data">
+        <form method="POST" action={{ route('elements.store') }} enctype="multipart/form-data">
             @csrf
             <div class="card-body">
                 <div class="form-group">
-                    <label for="financialAccountId">Conta Contábil</label>
-                    <select class="form-control" name="financialAccountId" value="{{ old('financialAccountId') }}">
-                        @foreach ($financialAccounts as $financialAccount)
-                            <option value="{{ $financialAccount->id }}">{{ $financialAccount->cod }} -
-                                {{ $financialAccount->description }}</option>
+                    <label for="natureExpenseId">Conta Contábil</label>
+                    <select class="form-control" name="natureExpenseId" value="{{ old('natureExpenseId') }}">
+                        @foreach ($natureExpenses as $natureExpense)
+                            <option value="{{ $natureExpense->id }}">{{ $natureExpense->cod }} -
+                                {{ $natureExpense->description }}</option>
                         @endforeach
                     </select>
-                    @error('financialAccountId')
+                    @error('natureExpenseId')
                         <p class="text-danger">{{ $message }}</p>
                     @enderror
                 </div>

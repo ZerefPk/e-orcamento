@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ExpenseElementUpdateRequest;
 use App\Models\ExpenseElement;
-use App\Models\FinancialAccount;
+use App\Models\NatureExpense;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -23,9 +23,9 @@ class ExpenseElementController extends Controller {
     }
 
     public function create(): View {
-        $financialAccounts = FinancialAccount::all();
+        $natureExpenses = NatureExpense::all();
 
-        return view('config.elements.create', ['financialAccounts' => $financialAccounts]);
+        return view('config.elements.create', ['natureExpenses' => $natureExpenses]);
     }
 
     public function store(Request $request) {
@@ -46,7 +46,7 @@ class ExpenseElementController extends Controller {
         $errored_expense_elements_count = 0;
         $succeeded_expense_elements_count = 0;
 
-        $financialAccount = FinancialAccount::findOrFail($request->input('financialAccountId'));
+        $natureExpense = NatureExpense::findOrFail($request->input('natureExpenseId'));
 
         foreach ($expenseElements as $expenseElement) {
             $cod_arr = explode('.', $expenseElement['COD']);
@@ -55,14 +55,14 @@ class ExpenseElementController extends Controller {
 
             $isElementCodeDigitsValid = strlen($last_cod[0]) == 2 && strlen($last_cod[1]) == 2;
 
-            if (count($cod_arr) != 8 || ! str_starts_with($expenseElement['COD'], $financialAccount->cod) || count(ExpenseElement::where('cod', '=', $expenseElement['COD'])->get()) > 0 || ! $isElementCodeDigitsValid) {
+            if (count($cod_arr) != 8 || ! str_starts_with($expenseElement['COD'], $natureExpense->cod) || count(ExpenseElement::where('cod', '=', $expenseElement['COD'])->get()) > 0 || ! $isElementCodeDigitsValid) {
                 $errored_expense_elements_count++;
                 $errored_expense_elements_alert_string = $errored_expense_elements_alert_string.'COD: '.$expenseElement['COD'].', DESCRICAO: '.$expenseElement['DESCRICAO'].' - Malformado</br>';
             } else {
                 $save = ExpenseElement::create([
                     'cod' => $expenseElement['COD'],
                     'description' => $expenseElement['DESCRICAO'],
-                    'financial_account_id' => $request->input('financialAccountId'),
+                    'nature_expense_id' => $request->input('natureExpenseId'),
                     'status' => strtolower($expenseElement['STATUS']) == 'ativo' ? true : false,
                 ]);
 
