@@ -19,6 +19,10 @@ return new class extends Migration {
                 'SERVIÇOS',
                 'IMPOSTO',
             ]);
+            $table->enum('type', [
+                'CONTRATAÇÃO',
+                'RENOVAÇÃO',
+            ])->nullable();
             $table->string('description');
             $table->string('justification')->nullable();
             $table->enum('unit_measurement', [
@@ -28,9 +32,9 @@ return new class extends Migration {
                 'HORA',
                 'DIA',
             ]);
-            $table->decimal('amount', 10, 2);
+            $table->decimal('installments', 10, 2)->default(1);
             $table->decimal('installment_value', 15, 2);
-            $table->decimal('total_contract_value', 15, 2);
+            $table->decimal('total_contract_value', 15, 2); //12
             $table->enum('hiring_month', [
                 '1',
                 '2',
@@ -44,48 +48,25 @@ return new class extends Migration {
                 '10',
                 '11',
                 '12',
-            ])->nullable();
-            $table->enum('renewal_month', [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-                '6',
-                '7',
-                '8',
-                '9',
-                '10',
-                '11',
-                '12',
-            ])->nullable();
-            $table->decimal('previous_residual', 15, 2)->default(0.00);
-            $table->decimal('margin', 3, 2)->default(0.00);
-            $table->decimal('renovation', 15, 2)->default(0.00);
-            $table->decimal('new_installment', 15, 2);
-            $table->decimal('current_budget', 15, 2);
-            $table->decimal('residual', 15, 2)->default(0.00);
+            ])->nullable(); //9
+            $table->decimal('previous_residual', 15, 2)->default(0.00); //9
+            $table->decimal('margin', 3, 2)->default(0.00); //25
+            $table->decimal('new_installment_value', 15, 2); //1,25
+            $table->decimal('renovation', 15, 2)->default(0.00); //1,25 * 3 = 3,75
+            $table->decimal('current_budget', 15, 2); //12,75
+            $table->decimal('residual', 15, 2)->default(0.00); // 33,75
             $table->unsignedBigInteger('expense_element_id');
-            $table->unsignedBigInteger('project_id');
             $table->unsignedBigInteger('accounting_year_id');
-            $table->unsignedBigInteger('budget_unit_id');
             $table->timestamps();
             $table->foreign('expense_element_id')
                 ->references('id')
                 ->on('expense_elements')
                 ->onDelete('restrict');
-            $table->foreign('project_id')
-                ->references('id')
-                ->on('projects')
-                ->onDelete('restrict');
             $table->foreign('accounting_year_id')
                 ->references('id')
                 ->on('accounting_years')
                 ->onDelete('restrict');
-            $table->foreign('budget_unit_id')
-                ->references('id')
-                ->on('budget_units')
-                ->onDelete('restrict');
+
         });
     }
 
